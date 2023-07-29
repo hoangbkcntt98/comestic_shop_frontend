@@ -1,0 +1,48 @@
+.card-button {
+    display: flex;
+    width: 60%;
+    height: 90%;
+    // justify-content: center;
+    position: relative;
+    border: 2px solid white;
+    border-radius: 10px;
+    background-color: #ed71a3;
+    color: white;
+    // @include flex(center,space-between);
+    a {
+        display: flex;
+        text-decoration: none;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+    }
+    a:hover{
+        color: white;
+    }
+    &__icon {
+        display: block;
+        width: 30%;
+        border-right: 2px solid white;
+        @include flex(center, center);
+    }
+    &__number {
+        display: block;
+        position: absolute;
+        top: 9px;
+        left: 30%;
+        // @include flex(center,center);
+        width: 100%;
+        height: 100%;
+        z-index: 999;
+    }
+    &__text {
+        font-weight: 900;
+        font-size: 15px;
+        display: block;
+        width: 70%;
+        @include flex(center, center);
+    }
+}
+.card-button:hover {
+    background-color: rgb(179, 57, 124);
+}

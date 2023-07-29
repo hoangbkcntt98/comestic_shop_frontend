@@ -1,0 +1,71 @@
+.or{
+    @include flex(center,center);
+    @include mobile{
+
+    }
+    margin-top:1em;
+    margin-bottom: 1em;
+}
+.login{
+    &__footer{
+        font-size: 20px;
+        >div>a{
+            font-size: 13px;
+            text-align: center
+        }
+    }
+    &__button{
+        @include flex(center,center);
+        margin-top:1em;
+            margin-bottom:1em;
+        width: 100%;
+        >button:hover{
+            background-color: white;
+            color: $main-color;
+        }
+    }
+    &__social{
+
+        @include flex(center,center);
+        margin-top: 2em;     
+        &__button{
+            cursor: pointer;
+            margin-left: 0.7em;
+            border: 0;
+            position: relative;
+            @include flex(center,center);
+            // margin-top: 1em;
+            padding: 0.5em;
+            color:white;
+            >i{
+                font-size: 20px;
+            }
+            &__divider{
+                display: block;
+                width: 2px;
+                position: absolute;
+                left: 34px;
+                // max-height: 100px;
+                height: 90%;
+                background-color: white;
+                content: "";
+            }
+            &__text{
+                margin-left: 20px;
+            }
+            &__fb{
+                background-color: #0657a3;
+            }
+            &__gg{
+                background-color: #FA8072;
+            }
+            // background-color: blue;
+        }
+    }
+    &__hr-title{
+        background-color: #f5f6fa;
+        border: none;
+        // color: #f5f6fa;
+        height:2px;
+    }
+}

@@ -1,0 +1,12 @@
+.product-list{
+    // @include flex(center,center);
+    
+    &__pagination{
+        
+        width: fit-content;
+        margin-left: 30%;
+        @include mobile{
+            margin-left: unset;
+        }
+    }
+}

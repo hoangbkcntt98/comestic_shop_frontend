@@ -1,0 +1,123 @@
+.catalog {
+    @include flex(flex-start, flex-start);
+
+    @include tablet {
+        flex-direction: column;
+    }
+    
+    &__filter {
+        width: 20%;
+        margin-left: 3em;
+        background-color: azure;
+        @include tablet {
+            width: max-content;
+            height: 100vh;
+            background-color: $main-bg;
+            padding: 1rem;
+            position: fixed;
+            left: 0;
+            top: $header-tablet-height;
+            z-index: 100;
+            box-shadow: $box-shadow;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        @include mobile {
+            top: $header-mobile-height;
+            width: 60%;
+            height: 60%;
+            overflow: scroll;
+            margin-left: 0;
+        }
+
+        &.active {
+            transform: translateX(0);
+        }
+
+        &__widget {
+            margin-bottom: 2rem;
+
+            &__title {
+                font-size: 1.25rem;
+                font-weight: 600;
+                text-transform: capitalize;
+                margin-bottom: 16px;
+                color: $main-color;
+                padding-left: 0.5rem;
+
+                &__category {
+                    padding-left: 0;
+                    width: 100%;
+                    height: 42px;
+                    border: medium;
+                    color: white;
+                    border-radius: 15px 0 15px 0;
+                    background-color: $main-color;
+
+                    // display: flex;
+                    @include flex(center, center);
+                }
+            }
+
+            &__content {
+              
+                padding-left: 1rem;
+                color: $txt-second-color;
+                &__item {
+                    margin-bottom: 13px;
+                }
+            }
+        }
+
+        &__close {
+            // display: none;
+            transform: translateX(-200%);
+            transition: transform 0.3s ease;
+            width: 100%;
+            display: block;
+            position: fixed;
+            top: #{$header-mobile-height + 5};
+            left: 60%;
+            z-index: 300;
+            // transform: translateX(0);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            &.show {
+                transform: translateX(0);
+                > i {
+                    background-color: $main-color;
+                    color: white;
+                    font-size: 35px;
+                }
+            }
+        }
+    }
+
+    &__content {
+        width: 70%;
+        &__loading{
+           span{
+               border-color: $main-color !important;
+            //    color: $main-color;
+           }
+            // width: 100%;
+            // background-color: red !important;
+            @include flex(center,center);
+        }
+        flex-grow: 1;
+
+        @include tablet {
+            width: 100%;
+        }
+    }
+
+    &__filter__toggle {
+        display: none;
+
+        @include tablet {
+            display: block;
+            margin-bottom: 2rem;
+        }
+    }
+}

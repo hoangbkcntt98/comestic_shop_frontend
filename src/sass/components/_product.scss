@@ -1,0 +1,272 @@
+.product {
+    box-shadow: 2px 2px 2px 4px rgba(0, 0, 0, 0.2),0px 1px 1px 0px rgba(0, 0, 0, 0.14),0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    // margin-top: 3px;
+    // border   : 5px solid $main-color;
+    @include mobile {
+        @include flex(flex-start, flex-start);
+        flex-direction: column;
+        padding: 10px;
+    }
+    padding: 3rem;
+    &__image__info{
+        @include mobile{
+            align-items: unset;
+            justify-content: unset;
+            display: unset;
+        }
+        // @include tablet{
+        //     align-items: unset;
+        //     justify-content: unset;
+        //     display: unset;
+        // }
+        @include flex(flex-start, flex-start);
+        width: 100%;
+    }
+    &__images {
+        @include flex(flex-start, flex-start);
+        width: 40%;
+        flex-wrap: wrap;
+
+        @include tablet {
+            width: 80%;
+        }
+
+        @include mobile {
+            width: 100%;
+        }
+        &__slide{
+            border: 3px solid $main-color;
+            width: 100%;
+            padding: 0.3rem;
+            margin: 2px;
+            @include flex(center,center);
+            &__item{
+                border: 1px solid $main-color   ;
+                // width: 50%;
+                // width: 50px;
+                p{
+                    @include mobile{
+                        font-size: 9px;
+                    }
+                    font-size: 10px;
+                }
+            }
+            img{
+                // width: 10px;
+                padding: 0.3em;
+            }
+        }
+        &__list {
+           
+            width: 100%;
+            display: flex;
+           
+            &__item {
+                width: 20%;
+                flex-wrap: wrap;
+                border: 2px solid $main-color;
+                padding: 2px;
+                margin-bottom: 4px;
+                cursor: pointer;
+            }
+        }
+
+        &__main {
+            flex-grow: 1;
+            // padding-top: 100%;
+            border: 2px solid $main-color;
+            position: relative;
+            padding:2em;
+            @include mobile{
+                padding: unset;
+            }
+            @include flex(flex-end,flex-end);
+            margin-bottom: 2rem;
+            // @include flex(center,center);
+            img {
+                width: 100%;
+                @include mobile{
+                    width: unset;
+                }
+                // position: absolute;
+                // top: 0;
+                // left: 50%;
+                // height: 100%;
+                // transform: translateX(-50%);
+            }
+        }
+    }
+
+    &__info {
+        flex-grow: 1;
+        hr{
+            color: gray;
+            width: 90%;
+        }
+        h2{
+            // font-size: 10px;
+            font-weight: 100;
+            padding-top: 1rem;
+        }
+        
+        // position: sticky;
+        // top: $header-shrink-height;
+        // width: 60%;
+       
+        margin-left: 4rem;
+
+        @include mobile {
+            padding-top: 2rem;
+            position: relative;
+            top: unset;
+            margin-left: unset;
+        }
+
+        &__title {
+            font-size: 2.5rem;
+            font-weight: normal;
+        
+        }
+
+        &__item {
+            margin-top: 2rem;
+            @include mobile{
+                margin-top: 0.5rem;
+            }
+            &__price {
+                color: $main-color;
+                font-size: 2rem;
+                font-weight: 600;
+            }
+
+            &__title {
+                font-size: 1.5rem;
+                font-weight: 600;
+                margin-bottom: 1rem;
+            }
+
+            &__list {
+                @include flex(center, flex-start);
+
+                &__item {
+                    @include flex(center, center);
+
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 50%;
+                    border: 2px solid $txt-second-color;
+                    cursor: pointer;
+                    margin-right: 1rem;
+
+                    @include mobile {
+                        width: 40px;
+                        height: 40px;
+                    }
+
+                    &.active {
+                        border-color: red;
+                    }
+
+                    &:hover {
+                        border-color: $main-color;
+                    }
+
+                    .circle {
+                        text-align: center;
+                        padding: 2px;
+                        // margin: 2px;
+                        width: 50px;
+                        height: 50px;
+                        display: flex;
+                        align-items: center;
+                        text-align: center;
+                        border-radius: 50%;
+
+                        @include mobile {
+                            width: 30px;
+                            height: 30px;
+                        }
+                    }
+
+                    &__size {
+                       
+                        font-size: 1.5rem;
+                        text-transform: uppercase;
+                    }
+                }
+            }
+
+            &__quantity {
+                @include flex(flex-start, flex-start);
+
+                &__btn {
+                    @include flex(center, center);
+                    width: 30px;
+                    height: 30px;
+                    border: 2px solid $txt-second-color;
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                }
+
+                &__input {
+                    @include flex(center, center);
+                    height: 30px;
+                    width: 90px;
+                    font-size: 1.5rem;
+                    border-top: 2px solid $txt-second-color;
+                    border-bottom: 2px solid $txt-second-color;
+                }
+            }
+
+            button {
+                margin-right: 1rem;
+                margin-bottom: 1rem;
+            }
+        }
+    }
+}
+
+.product-description {
+    width: 100%;
+    padding: 2rem 2rem 3rem;
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+    display: block;
+    
+    @include mobile {
+        display: none;
+    }
+
+    &.mobile {
+        display: none;
+
+        @include mobile {
+            display: block;
+        }
+    }
+
+    &.expand {
+        height: max-content;
+    }
+
+    &__title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 2rem 0;
+    }
+
+    &__content {
+        background-color: wheat;
+        font-size: 1.25rem;
+        line-height: 1.875rem;
+        text-align: justify;
+    }
+
+    &__toggle {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}

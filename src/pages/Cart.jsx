@@ -40,7 +40,7 @@ const Cart = () => {
         <React.Fragment>
 
             <Helmet title="Giỏ hàng">
-                <Breadcrumb />
+   
                 <div className="cart">
                     <div className="cart__info">
                         <div className="cart__info__txt">

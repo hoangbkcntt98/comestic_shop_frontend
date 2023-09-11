@@ -20,8 +20,10 @@ import productServices from '../services/productServices'
 import { setProducts, setTotalPage } from '../redux/product/ProductSlice'
 import MyProductCard from '../components/card/MyProductCard'
 import userServices from '../services/userServices'
+import Cookies from 'js-cookie';
 const noImages = require('../assets/images/no-images.png').default;
 const skirtImage = require('../assets/images/skirt.png').default;
+
 const Home = () => {
     const state = useSelector((state) => state.product)
     const dispatch = useDispatch();
@@ -34,9 +36,13 @@ const Home = () => {
         promotion: []
     })
     const { pan, set, skirt, bestSeller, promotion } = intro
+
+    React.useEffect(() => {
+        const authToken = Cookies.get('authToken');
+        
+    }, []);
     
     React.useEffect(() => {
-        console.log(state.products)
         setIntro({
             ...state,
             bestSeller: state.products.slice(-10),
@@ -98,10 +104,10 @@ const Home = () => {
                             bestSeller.length > 0 && bestSeller.map((item, index) => (
                                 <MyProductCard
                                     key={index}
-                                    image={item.variations[0].images[0] ? item.variations[0].images[0] : noImages}
+                                    image={item.images[0] ?? noImages}
                                     name={item.name}
-                                    price={Number(item.variations[0].retail_price)}
-                                    slug={item.custom_id}
+                                    price={Number(item.price)}
+                                    slug={item.id}
                                 />
                             ))
                         }

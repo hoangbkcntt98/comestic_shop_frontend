@@ -12,6 +12,7 @@ import Button from '../button/Button'
 import numberWithCommas from '../../utils/numberWithCommas'
 import { Button as Btn, IconButton } from '@mui/material'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import NormalButton from '../button/NormalButton'
 const noImages = require('../../assets/images/no-images.png').default;
 
 const MyProductCard = props => {
@@ -56,6 +57,29 @@ const MyProductCard = props => {
                     <span className="product-card__price__old">
                         <del>{numberWithCommas(399000)}</del>
                     </span>
+                </div>
+                <div className="product-card__overlay__mobile">
+                    <div className="product-card__overlay__mobile__btns">
+                        <NormalButton
+                            size="sm"
+                            icon="bx bxs-cart-add"
+                            // animate={true}
+                            onClick={() => dispatch(set(props.slug))}
+                        >
+                            Thêm vào giỏ 
+                        </NormalButton>
+                        <Link to={`/catalog/${props.slug}`}>
+                        <NormalButton
+                            size="sm"
+                            icon="bx bx-search"
+  
+                            // animate={true}
+                            // onClick={() => dispatch(set(props.slug))}
+                        >
+                            Xem
+                        </NormalButton>
+                        </Link>
+                    </div>
                 </div>
             </Link>
 

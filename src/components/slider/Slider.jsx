@@ -45,13 +45,13 @@ export default function Slider() {
       <div className="slider-item">
 
         <div className="slider-item__image">
-          <img src={props.data.variations[0].images[0]} alt="" />
+          <img src={props.data.images[0]} alt="" />
           <div className="slider-item__info__price">
             <div className="slider-item__info__price__text1">
               Only
             </div>
             <div className="slider-item__info__price__text2">
-              {numberWithCommas(props.data.variations[0].retail_price)} VND
+              {numberWithCommas(props.data.price)} VND
             </div>
           </div>
 

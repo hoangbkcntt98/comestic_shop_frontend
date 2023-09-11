@@ -75,7 +75,6 @@ export default function Signup() {
     }, [])
     return (
         <React.Fragment>
-            <Breadcrumb />
             <ThemeProvider theme={theme}>
                 <Container component="main" maxWidth="md" >
                     <CssBaseline />

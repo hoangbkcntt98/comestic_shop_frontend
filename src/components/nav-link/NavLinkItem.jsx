@@ -1,51 +1,69 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react'
-import { useDispatch ,useSelector} from 'react-redux'
-import { updateLinks } from '../../redux/product/ProductSlice'
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const NavLinkItem = (props) => {
-    const dispatch = useDispatch()
-    const links = useSelector(state => state.product.links)
-    const { open, showDropdown, title,update,offDrop} = props
+  const dispatch = useDispatch();
+  const links = useSelector((state) => state.product.links);
+  const categories = useSelector((state) => state.product.categories);
+  const { showDropdown, category, filterProducts } = props;
+  const hasChildCategory = () => {
     return (
-        <React.Fragment>
-            <div class="nav-link__item">
-                <div class="nav-link__item__root">
-                    <div class="nav-link__item__root__link">
-                        <i class="bx bxs-right-arrow small-icons" type="solid"></i>
-                        <a onClick={()=>{
-                            dispatch(updateLinks({
-                                display:title.root,
-                                link:'/catalog'
-                            }))
-                            update('INDEX',title)
-                            }} title={title.root}><i class="fa fa-caret-right" aria-hidden="true"></i>{offDrop?<h4>{title.root}</h4>:title.root}</a>
-                    </div>
+      categories.filter((item) => item.parent_id == category.id).length > 0
+    );
+  };
+  return (
+    <React.Fragment>
+      <div class="nav-link__item">
+        <div class="nav-link__item__root">
+          <div class="nav-link__item__root__link">
+            <i class="bx bxs-right-arrow small-icons" type="solid"></i>
+            <a category={category.name}  onClick={() => filterProducts(category)}>
+              <i class="fa fa-caret-right" aria-hidden="true"></i>
+              {category.name}
+            </a>
+          </div>
 
-                    {title.child.length>0&&!offDrop&&<div class="nav-link__item__root__dropdown__btn">
-                        <i class="bx bx-chevron-down" onClick={() =>showDropdown(title.root)}></i>
-                    </div>}
-                </div>
-
-                <ul class={open ? 'nav-link__dropdown__show' : 'nav-link__dropdown'} >
-                    {title.child.map((element, key) => {
-                        return (
-                            <li class="nav-link__dropdown__item " key={key}>
-                                <a class="nav-link__dropdown__aothun" onClick={() =>{
-                                    dispatch(updateLinks({
-                                        display:element.display,
-                                        link:'/catalog'
-                                    }))
-                                    update('INDEX',element)
-                                    }} title={element.display}>{element.display}</a>
-                            </li>
-                        )
-                    })}
-                </ul>
+          {hasChildCategory()  && (
+            <div class="nav-link__item__root__dropdown__btn">
+              <i
+                class={
+                  category.open ? "bx bx-chevron-down" : "bx bx-chevron-right"
+                }
+                onClick={() => showDropdown(category.id)}
+              ></i>
             </div>
-        </React.Fragment>
+          )}
+        </div>
 
-    )
-}
+        <ul
+          class={
+            category.open
+              ? "nav-link__dropdown__show"
+              : "nav-link__dropdown"
+          }
+        >
+          {categories
+            .filter((cate) => {
+              return cate.parent_id == category.id;
+            })
+            .map((childCategory, key) => {
+              return (
+                <li class="nav-link__dropdown__item " key={key}>
+                  <a
+                    class="nav-link__dropdown__aothun"
+                    onClick={() => filterProducts(childCategory)}
+                    category={childCategory.name}
+                  >
+                    {childCategory.name}
+                  </a>
+                </li>
+              );
+            })}
+        </ul>
+      </div>
+    </React.Fragment>
+  );
+};
 
-export default NavLinkItem
+export default NavLinkItem;

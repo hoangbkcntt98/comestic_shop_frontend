@@ -15,6 +15,9 @@ const userServices = {
         let res = await services.post('login',null,loginData);
         return formatRespone(res)
     },
+    async loginWithGoole(token) {
+
+    },
     async signup(registerData){
         let res = await services.post('user/signup',null,registerData);
         return res;

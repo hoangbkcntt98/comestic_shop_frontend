@@ -6,7 +6,10 @@
     }
 
     &__list {
-        width: 60%;
+        width: 100%;
+        margin-top: 2%;
+        box-shadow: $box-shadow;
+        padding: 1rem;
 
         @include mobile {
             width: 100%;
@@ -60,13 +63,17 @@
     &__item {
         @include flex(center, flex-start);
         margin-bottom: 20px;
-
+        padding: 10px;
+        &:hover{
+            background-color: aliceblue;
+            cursor: pointer;
+            transform: scale(1.02);
+        }
         &__image {
             // width: 10%;
-            margin-right: 20px;
-
+            margin-right: 1rem;
             img {
-                height: 150px;
+                height: 10rem;
             }
         }
 

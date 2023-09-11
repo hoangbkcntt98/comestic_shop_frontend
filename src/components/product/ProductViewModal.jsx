@@ -1,52 +1,54 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from "react-redux";
 
-import ProductView from './MyProductview'
-
-import Button from '../button/Button'
-
-import { remove } from '../../redux/product-modal/productModalSlice'
-
-import productData from '../../assets/fake-data/products'
+import Button from "../button/Button";
+import { remove } from "../../redux/product-modal/productModalSlice";
+import MyProductview from "./MyProductview";
+import Product from "../../pages/Product";
+import productServices from "../../services/productServices";
+import { Status } from "../../status";
+import { PROPERTY_COLOR, PROPERTY_SIZE } from "../../utils/constant";
 
 const ProductViewModal = () => {
+  const productId = useSelector((state) => state.productModal.value);
+  const dispatch = useDispatch();
 
-    const productSlug = useSelector((state) => state.productModal.value)
-    const productsRedux = useSelector((state) => state.product.products)
-    const dispatch = useDispatch()
+  const [product, setProduct] = useState(undefined);
 
-    const [product, setProduct] = useState(undefined)
+  useEffect(() => {
+    console.log(productId)
+    productServices.getProduct(productId).then((res) => {
+      if (res.status == Status.SUCCESS) {
+        let item = JSON.parse(JSON.stringify(res.data));
+        item.image = item.images[0];
+        item.colors = item.properties
+          .filter((property) => property.type == PROPERTY_COLOR)
+          .map((property) => property.name);
+        item.sizes = item.properties
+          .filter((property) => property.type == PROPERTY_SIZE)
+          .map((property) => property.name);
+        setProduct(item);
+      }else {
+        setProduct(undefined)
+      }
+    });
+  }, [productId]);
 
-    useEffect(() => {
-        console.log(productSlug)
-        if(productSlug){
-            let prod = productsRedux.find((item) => item.custom_id == productSlug)
-            console.log(prod)
-            setProduct(prod)
-        }else{
-            setProduct(undefined)
-            console.log('empty select product');
-        }
-
-        // setProduct(productData.getProductBySlug(productSlug))
-    }, [productSlug]);
-
-    return (
-        <div className={`product-view__modal ${product === undefined ? '' : 'active'}`}>
-            <div className="product-view__modal__content">
-                {product&&<ProductView product={product}/>}
-                <div className="product-view__modal__content__close">
-                    <Button
-                        size="sm"    
-                        onClick={() => dispatch(remove())}
-                    >
-                        đóng
-                    </Button>
-                </div>
-            </div>
+  return (
+    <div
+      className={`product-view__modal ${product === undefined ? "" : "active"}`}
+    >
+      <div className="product-view__modal__content">
+        {product && <MyProductview product={product} />}
+        <div className="product-view__modal__content__close">
+          <Button size="sm" onClick={() => dispatch(remove())}>
+            đóng
+          </Button>
         </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
 
-export default ProductViewModal
+export default ProductViewModal;

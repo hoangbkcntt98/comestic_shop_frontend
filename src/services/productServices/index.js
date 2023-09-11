@@ -3,24 +3,26 @@ import { formatRespone } from "../../utils/format";
 import { useSelector } from "react-redux";
 
 const productServices = {
-  
-    async getProducts(params){
-
-        let rs = await services.get('products',params);
-        //console.log(rs)
-        return rs.data.content
-        // return rs.data.data
-    },
-    async getProduct(params){
-        let rs = await services.get('products/find/'+params);
-        //console.log(rs)
-        return rs.data.content        // return rs.data.data
-    },
-    async getProductAttributes(params){
-        let rs = await services.get('/products/attributes',params)
-        //console.log('atributes',rs)
-        return rs.data.content
-    }
-  
-}   
+  async getProducts(params) {
+    let rs = await services.get("products", params);
+    return rs.data;
+  },
+  async getProduct(id) {
+    let rs = await services.get("products/" + id);
+    return rs.data; // return rs.data.data
+  },
+  async getProductProperties(params) {
+    let rs = await services.get("/products.properties", params);
+    // console.log('atributes',rs)
+    return rs.data;
+  },
+  async getProductCategories(params) {
+    let rs = await services.get("/products.categories", params);
+    return rs.data;
+  },
+  getSyncProducts(params) {
+    let rs = services.get("products", params);
+    return rs;
+  },
+};
 export default productServices;

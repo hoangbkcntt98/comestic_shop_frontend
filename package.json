@@ -2,6 +2,7 @@
   "name": "code",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://hoangbkcntt98.github.io/react-gh-pages",
   "dependencies": {
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
@@ -45,6 +46,8 @@
     }
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "watch": "npm-watch",
     "start": "react-scripts start",
     "build": "CI=false && react-scripts build",
